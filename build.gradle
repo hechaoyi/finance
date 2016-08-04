@@ -1,0 +1,15 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies { classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE" }
+}
+
+apply plugin: "war"
+apply plugin: "spring-boot"
+
+repositories { jcenter() }
+sourceCompatibility = 1.8
+
+dependencies {
+  // spring-boot
+  compile "org.springframework.boot:spring-boot-starter-web"
+}
