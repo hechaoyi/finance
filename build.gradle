@@ -8,20 +8,17 @@ apply plugin: "spring-boot" // bootRun | bootRepackage
 
 repositories { jcenter() }
 sourceCompatibility = 1.8
-ext.ver = [
-  // library
-  guava: "19.0"
-]
 
 dependencies {
   // spring-boot
   compile "org.springframework.boot:spring-boot-starter-web"
   compile "org.springframework.boot:spring-boot-starter-data-jpa"
-  compile "org.springframework.boot:spring-boot-starter-security"
+  runtime "org.springframework.boot:spring-boot-starter-security"
+  runtime "org.springframework.boot:spring-boot-starter-actuator"
+  testCompile "org.springframework.boot:spring-boot-starter-test"
   // database
-  runtime "mysql:mysql-connector-java"
   runtime "com.h2database:h2"
   // library
-  compile "com.google.guava:guava:${ver.guava}"
+  compile "com.google.guava:guava:19.0"
 }
 // https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.4.0.RELEASE/spring-boot-dependencies-1.4.0.RELEASE.pom

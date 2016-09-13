@@ -1,4 +1,8 @@
-security:
-  user:
-    name:     cy.he
-    password: 1234
+security.user:
+  name: chaoyi
+  password: he
+logging.level:
+  ## http://docs.jboss.org/hibernate/orm/current/topical/html_single/logging/Logging.html
+  org.hibernate.SQL: debug
+  org.hibernate.tool: debug
+  org.hibernate.cache: debug
