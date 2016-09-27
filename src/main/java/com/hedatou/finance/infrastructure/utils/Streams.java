@@ -3,6 +3,7 @@ package com.hedatou.finance.infrastructure.utils;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -88,6 +89,26 @@ public abstract class Streams {
      */
     public static <T, R> Set<R> mapToSet(T[] array, Function<? super T, ? extends R> mapper) {
         return Arrays.stream(array).map(mapper).collect(toSet());
+    }
+
+    /**
+     * array allMatch
+     * @param array
+     * @param predicate
+     * @return
+     */
+    public static <T> boolean all(T[] array, Predicate<? super T> predicate) {
+        return Arrays.stream(array).allMatch(predicate);
+    }
+
+    /**
+     * array sum BigDecimal
+     * @param array
+     * @param mapper
+     * @return
+     */
+    public static <T> BigDecimal sumBigDecimal(T[] array, Function<? super T, BigDecimal> mapper) {
+        return Arrays.stream(array).map(mapper).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

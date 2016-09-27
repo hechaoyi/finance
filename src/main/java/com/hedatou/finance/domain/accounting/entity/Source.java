@@ -2,10 +2,7 @@ package com.hedatou.finance.domain.accounting.entity;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -17,8 +14,10 @@ import com.hedatou.finance.infrastructure.entity.BaseEntity;
 
 /**
  * 实现描述：会计：资源，最小单位
+ * 资产 + 支出 = 负债 + 权益 + 收入
+ * Asset + Expense = Liability + Equity + Revenue
  *
- * @author 和超逸 (cy.he@zuche.com)
+ * @author hechaoyi@me.com
  * @since 2016年9月14日 下午3:02:11
  */
 @Entity
@@ -27,12 +26,12 @@ import com.hedatou.finance.infrastructure.entity.BaseEntity;
 @Table(name = "acct_source")
 public class Source extends BaseEntity {
 
-    public static enum SourceType {
-        asset, // 资产
-        expense, // 支出
-        liability, // 债务
-        equity, // 权益
-        revenue; // 收入
+    public enum SourceType {
+        asset, // 资产，有增有减
+        expense, // 支出，只增不减
+        liability, // 债务，有增有减
+        equity, // 权益，有增有减
+        revenue; // 收入，只增不减
 
         public boolean isDebit() {
             return this == asset || this == expense;
@@ -43,7 +42,7 @@ public class Source extends BaseEntity {
         }
     }
 
-    public static enum SourceStatus {
+    public enum SourceStatus {
         present, deceased
     }
 
@@ -64,6 +63,9 @@ public class Source extends BaseEntity {
     @NotNull
     @Min(0)
     private BigDecimal amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account account;
 
     // ----------------------------------------
     // ----------------------------------------
@@ -89,10 +91,6 @@ public class Source extends BaseEntity {
         return type;
     }
 
-    public void setType(SourceType type) {
-        this.type = type;
-    }
-
     public SourceStatus getStatus() {
         return status;
     }
@@ -115,6 +113,14 @@ public class Source extends BaseEntity {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

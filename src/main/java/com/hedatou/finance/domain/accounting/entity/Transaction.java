@@ -82,6 +82,9 @@ public class Transaction extends BaseEntity {
         return activities;
     }
 
+    // ----------------------------------------
+    // ----------------------------------------
+
     public Activity addActivity() {
         if (this.activities == null)
             this.activities = Sets.newHashSet();

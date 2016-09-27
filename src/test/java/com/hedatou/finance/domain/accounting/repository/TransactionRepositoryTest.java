@@ -33,7 +33,7 @@ public class TransactionRepositoryTest {
 
         Source wallet = new Source(SourceType.asset, BigDecimal.valueOf(10));
         Source me = new Source(SourceType.equity, BigDecimal.valueOf(10));
-        tx.addActivity().setEquation(wallet, me);
+        tx.addActivity().setEstablishEquation(wallet, me);
 
         repository.save(tx);
     }

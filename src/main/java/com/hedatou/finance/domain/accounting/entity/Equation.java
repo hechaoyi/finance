@@ -20,22 +20,34 @@ import com.hedatou.finance.infrastructure.entity.BaseEntity;
 @Table(name = "acct_equation")
 public class Equation extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    public enum EquationType {
+        establish, neutralize
+    }
+
+    // ----------------------------------------
+    // ----------------------------------------
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private EquationType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     private Activity activity;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private Source debit;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private Source credit;
 
     // ----------------------------------------
     // ----------------------------------------
 
-    public Equation(Activity activity, Source debit, Source credit) {
+    public Equation(EquationType type, Activity activity, Source debit, Source credit) {
+        this.type = type;
         this.activity = activity;
         this.debit = debit;
         this.credit = credit;
@@ -46,6 +58,10 @@ public class Equation extends BaseEntity {
 
     // ----------------------------------------
     // ----------------------------------------
+
+    public EquationType getType() {
+        return type;
+    }
 
     public Activity getActivity() {
         return activity;

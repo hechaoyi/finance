@@ -17,6 +17,7 @@ dependencies {
   runtime "org.springframework.boot:spring-boot-starter-actuator"
   testCompile "org.springframework.boot:spring-boot-starter-test"
   // database
+  runtime "mysql:mysql-connector-java"
   runtime "com.h2database:h2"
   // library
   compile "com.google.guava:guava:19.0"
